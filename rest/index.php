@@ -17,7 +17,7 @@ Flight::register('cource_service', "CourcesServices");
 Flight::register('cource_dao',"CoursesDao");
 
 Flight::route('/',function(){
-    echo 'welcome!';
+    FLight::json(Flight::student_service()->get_all());
 });
 
 Flight::route('/dao',function(){

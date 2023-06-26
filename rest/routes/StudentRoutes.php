@@ -1,7 +1,7 @@
 <?php
 
 Flight::route('GET /students',function(){
-    FLight::json(Flight::student_service()->get_all());
+    echo "hi";
 });
 
 Flight::route('GET /students/@id',function($id){
