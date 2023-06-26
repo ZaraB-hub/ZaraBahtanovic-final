@@ -7,7 +7,7 @@ Flight::route('GET /midterm/connection-check', function(){
     * This endpoint does not have to return output in JSON format
     * Sample output is given in figure 2
     */
-    echo "Connection good";
+   
 });
 
 Flight::route('POST /midterm/investor', function(){

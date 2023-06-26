@@ -18,22 +18,22 @@ class FinalService {
     /** TODO
     * Implement service method to add new investor to investor table and cap-table
     */
-    public function investor(){
-
+    public function investor($data){
+        return $this->dao->investor($data);
     }
 
     /** TODO
     * Implement service method to return list of all share classes from share_classes table
     */
     public function share_classes(){
-
+        return $this->dao->share_classes();
     }
 
     /** TODO
     * Implement service method to return list of all share class categories from share_class_categories table
     */
     public function share_class_categories(){
-
+        return $this->dao->share_class_categories();
     }
 }
 ?>

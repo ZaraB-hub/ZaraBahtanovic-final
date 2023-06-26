@@ -2,11 +2,8 @@
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 Flight::route('GET /final/connection-check', function(){
-    /** TODO
-    * This endpoint prints the message from constructor within MidtermDao class
-    * Goal is to check whether connection is successfully established or not
-    * This endpoint does not have to return output in JSON format
-    */
+    new MidtermDao;
+    
 });
 
 Flight::route('GET /final/login', function(){
@@ -17,6 +14,19 @@ Flight::route('GET /final/login', function(){
     * Sample output is given in figure 7
     * This endpoint should return output in JSON format
     */
+    $login = Flight::request()->data->getData();
+    $user = Flight::users_service()->getUserByEmail($login['email']);
+    if (isset($user['UsersID'])){
+      if($user['Password'] == ($login['password'])){
+        unset($user['Password']);
+        $jwt = JWT::encode($user,"secret", 'HS256');
+        Flight::json(['token' => $jwt, 'message'=>"login good"]);
+      } else {
+        Flight::json(["message" => "Wrong credentials"], 404);
+      }
+    } else {
+      Flight::json(["message" => "User doesn't exist"], 404);
+    }
 });
 
 Flight::route('POST /final/investor', function(){
@@ -34,6 +44,8 @@ Flight::route('POST /final/investor', function(){
     * This endpoint should return output in JSON format
     * Sample output is given in figure 2 (message should be updated according to the result)
     */
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::users_service()->investors($data));
 });
 
 
@@ -42,6 +54,8 @@ Flight::route('GET /final/share_classes', function(){
     * This endpoint is used to list all share classes from share_classes table
     * This endpoint should return output in JSON format
     */
+    Flight::json(Flight::finalService()->share_classes());
+
 });
 
 Flight::route('GET /final/share_class_categories', function(){
@@ -49,5 +63,7 @@ Flight::route('GET /final/share_class_categories', function(){
     * This endpoint is used to list all share class categories from share_class_categories table
     * This endpoint should return output in JSON format
     */
+    Flight::json(Flight::finalService()->share_class_categories());
+
 });
 ?>

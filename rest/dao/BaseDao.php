@@ -2,7 +2,7 @@
 
 class BaseDao {
 
-    private $conn;
+    protected $conn;
 
     /**
     * constructor of dao class
@@ -10,11 +10,20 @@ class BaseDao {
     public function __construct(){
         try {
 
-        $servername = " db-mysql-nyc1-13993-do-user-3246313-0.b.db.ondigitalocean.com";
+
+
+        $servername = "db-mysql-nyc1-13993-do-user-3246313-0.b.db.ondigitalocean.com";
         $username = "doadmin";
         $password = "AVNS_z6PG_c6BSn-5dB0CG5S";
-        $schema = "final-midterm2-2023";
-        $port=25060;
+        $port="25060";
+        $schema="final-midterm2-2023";
+        
+        // $servername = "localhost";
+        // $username = "root";
+        // $password = "uniburch";
+        // $schema = "final";
+        // $port="25060";
+
 
         /*options array neccessary to enable ssl mode - do not change*/
         $options = array(
@@ -28,8 +37,7 @@ class BaseDao {
         * Use $options array as last parameter to new PDO call after the password
         */
 
-        $this->conn = new PDO("mysql:host=$servername;dbname=$schema,$port", $username, $password, $options);
-        // set the PDO error mode to exception
+        $this->conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password, $options);        // set the PDO error mode to exception
           $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
           echo "Connected successfully";
         } catch(PDOException $e) {
