@@ -1,27 +1,21 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS, PATCH');
-require '../vendor/autoload.php';
-require_once './Config.class.php';
 
-require_once 'services/StudentServices.php';
-require_once 'routes/StudentRoutes.php';
-require_once 'dao/StudentDao.class.php';
-Flight::register('student_service', "StudentServices");
-Flight::register('student_dao',"StudentDao");
+require "../vendor/autoload.php";
+require "./services/MidtermService.php";
+require "./services/FinalService.php";
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
-require_once 'services/CourcesServices.php';
-require_once 'routes/CourcesRoutes.php';
-require_once 'dao/CourcesDao.class.php';
-Flight::register('cource_service', "CourcesServices");
-Flight::register('cource_dao',"CoursesDao");
+Flight::register('midtermService', 'MidtermService');
+Flight::register('finalService', 'FinalService');
 
-Flight::route('/',function(){
-    FLight::json(Flight::student_service()->get_all());
-});
+require 'routes/MidtermRoutes.php';
+require 'routes/FinalRoutes.php';
 
-Flight::route('/dao',function(){
-    echo 'welcome + dao!';
-});
+/** TODO
+* Add middleware to protect routes rest/final/share_classes AND rest/final/share_class_categories
+*/
+
 
 Flight::start();
+ ?>
