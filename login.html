@@ -55,20 +55,22 @@
      */
 
      function login(){
-      var email=$("#email").val();
+      var email1=$("#email").val();
       var pass=$("#pass").val();
+  
       $.ajax({
         url: "rest/final/login",
         type: "POST",
-        data: JSON.stringify({"email":email,"password":pass}),
+        data: JSON.stringify({email:email1,password:pass}),
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
+          console.log("suucess")
           localStorage.setItem("user_token", result.token);
           window.location.replace("index.html");
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-          toastr.error(XMLHttpRequest.responseJSON.message);
+          console.log("error")
         },
       });
      }

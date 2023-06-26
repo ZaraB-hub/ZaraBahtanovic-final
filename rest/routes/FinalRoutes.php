@@ -6,7 +6,7 @@ Flight::route('GET /final/connection-check', function(){
     
 });
 
-Flight::route('GET /final/login', function(){
+Flight::route('POST /final/login', function(){
     /** TODO
     * This endpoint is used to login user to system
     * you can use email: demo.user@gmail.com and password: 123 to login
@@ -14,19 +14,14 @@ Flight::route('GET /final/login', function(){
     * Sample output is given in figure 7
     * This endpoint should return output in JSON format
     */
-    $login = Flight::request()->data->getData();
-    $user = Flight::finalService()->getUserByEmail($login['email']);
-    if (isset($user['ID'])){
-      if($user['Password'] == ($login['password'])){
-        unset($user['Password']);
+    $user = Flight::request()->data->getData();
+      if($user['password'] == 123 and $user['email']=="demo.user@gmail.com"){
         $jwt = JWT::encode($user,"secret", 'HS256');
         Flight::json(['token' => $jwt, 'message'=>"login good"]);
       } else {
         Flight::json(["message" => "Wrong credentials"], 404);
       }
-    } else {
-      Flight::json(["message" => "User doesn't exist"], 404);
-    }
+    
 });
 
 Flight::route('POST /final/investor', function(){
@@ -45,7 +40,7 @@ Flight::route('POST /final/investor', function(){
     * Sample output is given in figure 2 (message should be updated according to the result)
     */
     $data = Flight::request()->data->getData();
-    Flight::json(Flight::users_service()->investors($data));
+    Flight::json(Flight::finalService()->investors($data));
 });
 
 
