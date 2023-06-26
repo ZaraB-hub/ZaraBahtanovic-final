@@ -324,24 +324,27 @@
      * Implement AJAX request to POST rest/final/investor and save investor to DB
      */
 
-    //  $.ajax({
-    //     url: 'rest/investors',
-    //     type: 'POST',
-    //     data: JSON.stringify({
-    //       "first_name": "sender_id",
-    //       "last_name": "recipient_id",
-    //       "email": "amount"
-    //     }),
-    //     contentType: "application/json",
-    //     dataType: "json",
-    //     success: function (response) {
-    //       console.log("yes");
-    //       transgers();
-    //     },
-    //     error: function (jqXHR, textStatus, errorThrown) {
-    //       console.log("help");
-    //     }
-    //   });
-    // };
+     var fn=$("#first_name").val();
+     var ln=$("#last_name").val();
+     var e=$("#email").val();
+     $.ajax({
+        url: 'rest/investors',
+        type: 'POST',
+        data: JSON.stringify({
+          first_name: fn,
+          last_name: ln,
+          email: e
+        }),
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+          console.log("yes");
+          transgers();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log("help");
+        }
+      });
+    };
   </script>
 </html>
