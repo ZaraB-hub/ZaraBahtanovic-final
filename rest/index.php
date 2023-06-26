@@ -2,6 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS, PATCH');
 require '../vendor/autoload.php';
+require_once './Config.class.php';
 
 require_once 'services/StudentServices.php';
 require_once 'routes/StudentRoutes.php';
@@ -17,6 +18,10 @@ Flight::register('cource_dao',"CoursesDao");
 
 Flight::route('/',function(){
     echo 'welcome!';
+});
+
+Flight::route('/dao',function(){
+    echo 'welcome + dao!';
 });
 
 Flight::start();

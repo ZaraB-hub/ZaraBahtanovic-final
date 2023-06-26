@@ -2,16 +2,15 @@
 
 class Database
 {
-    private  $servername = "localhost";
-    private  $username = "root";
-    private  $password = "uniburch";
-    private  $db = "quiz";
 
     public static function conn()
     {
         try {
-            // $conn = new PDO("mysql:host=$this->servername;dbname=$this->db", $this->username, $this->password);
-            $conn = new PDO("mysql:host=localhost;dbname=quiz","root", "uniburch");
+            $servername = Config::DB_HOST();
+            $username = Config::DB_USERNAME();
+            $password = Config::DB_PASSWORD();
+            $schema = Config::DB_SCHEMA();
+            $conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
 
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
