@@ -267,7 +267,7 @@
               <label for="email">Company:</label>
               <input
                 type="email"
-                id="email"
+                id="cemail"
                 name="email"
                 class="form-control"
               />
@@ -327,13 +327,15 @@
      var fn=$("#first_name").val();
      var ln=$("#last_name").val();
      var e=$("#email").val();
-     $.ajax({
+     var c=$("#cemail").val();    
+      $.ajax({
         url: 'rest/investors',
         type: 'POST',
         data: JSON.stringify({
           first_name: fn,
           last_name: ln,
-          email: e
+          email: e,
+          company:c
         }),
         contentType: "application/json",
         dataType: "json",
@@ -345,6 +347,6 @@
           console.log("help");
         }
       });
-    };
+    
   </script>
 </html>
