@@ -15,8 +15,8 @@ Flight::route('GET /final/login', function(){
     * This endpoint should return output in JSON format
     */
     $login = Flight::request()->data->getData();
-    $user = Flight::users_service()->getUserByEmail($login['email']);
-    if (isset($user['UsersID'])){
+    $user = Flight::finalService()->getUserByEmail($login['email']);
+    if (isset($user['ID'])){
       if($user['Password'] == ($login['password'])){
         unset($user['Password']);
         $jwt = JWT::encode($user,"secret", 'HS256');

@@ -53,5 +53,10 @@ class FinalDao extends BaseDao {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // function getUserByEmail($email)
+    // {
+    //     return $this->query_unique("SELECT * FROM users WHERE Email = :email", ["email" => $email]);
+    // }
 }
 ?>
